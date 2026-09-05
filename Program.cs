@@ -56,10 +56,23 @@ namespace Pr_1_1
 
         }
 
+        /// <summary>
+        /// Вывод заданных данных
+        /// </summary>
+        /// <param name="items">массив множества</param>
+        protected static void GetInitialData<T>(IEnumerable<SetWrapper<T>> items) 
+        {
+            foreach (var item in items)
+                Console.WriteLine($"A = [{string.Join(", ", item.AllItems())}]");
+            Console.WriteLine();
+        }
+
+        /// <summary>
+        /// Вывод и подсчет данных по первому заданию
+        /// </summary>
         protected static void GetResultOneTask<T>(SetWrapper<T> A, SetWrapper<T> B)
         {
-            Console.WriteLine($"A = [{string.Join(", ", A.AllItems())}]");
-            Console.WriteLine($"B = [{string.Join(", ", B.AllItems())}]");
+            GetInitialData([A, B]);
 
             Console.WriteLine($"A + B = [{string.Join(", ", A.Union(B).AllItems())}]");
             Console.WriteLine($"A - B = [{string.Join(", ", A.Intersect(B).AllItems())}]");
@@ -67,12 +80,12 @@ namespace Pr_1_1
             Console.WriteLine();
         }
 
-            protected static void GetResultTwoTask<T>(SetWrapper<T> A, SetWrapper<T> B, SetWrapper<T> C, SetWrapper<T> U)
+        /// <summary>
+        /// Вывод и подсчет данных по второму заданию заданию
+        /// </summary>
+        protected static void GetResultTwoTask<T>(SetWrapper<T> A, SetWrapper<T> B, SetWrapper<T> C, SetWrapper<T> U)
         {
-            Console.WriteLine($"A = [{string.Join(", ", A.AllItems())}]");
-            Console.WriteLine($"B = [{string.Join(", ", B.AllItems())}]");
-            Console.WriteLine($"C = [{string.Join(", ", C.AllItems())}]");
-            Console.WriteLine($"U = [{string.Join(", ", U.AllItems())}]");
+            GetInitialData([A, B, C, U]);
 
             Console.WriteLine($"A - (B + C) = [{string.Join(", ", A.Intersect(B.Union(C)).AllItems())}]"); // A ∩ (B ∪ C)
             Console.WriteLine($"(A + B) - C = [{string.Join(", ", (A.Union(B)).Intersect(C).AllItems())}]"); // (A ∪ B) ∩ C

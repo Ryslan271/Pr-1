@@ -9,7 +9,7 @@ namespace Pr_1_1
     {
         static void Main(string[] args)
         {
-            var U = new HashSet<char>("абвгдеёжзийклмнопрстуфхцчшщъыьэюя"); // алфовит
+            var alf = new HashSet<char>("абвгдеёжзийклмнопрстуфхцчшщъыьэюя"); // алфовит
 
             // Первое задание "Даны множества А и В. Найти объединение, пересечение и разность множеств"
             var A1 = new SetWrapper<int> ([2, 4, 6, 8, 10]);
@@ -45,7 +45,7 @@ namespace Pr_1_1
             var B7 = new SetWrapper<char>(['у', 'р', 'о', 'к']);
             var C7 = new SetWrapper<char>(['г', 'р', 'у', 'п', 'п', 'а']);
             var U7 = new SetWrapper<char>();
-            foreach (var item in U)
+            foreach (var item in alf)
                 U7.Add(item);
 
             // Выпод результата второго задания
@@ -60,10 +60,10 @@ namespace Pr_1_1
         /// Вывод заданных данных
         /// </summary>
         /// <param name="items">массив множества</param>
-        protected static void GetInitialData<T>(IEnumerable<SetWrapper<T>> items) 
+        protected static void GetInitialData<T>(Dictionary<string, SetWrapper<T>> items) 
         {
             foreach (var item in items)
-                Console.WriteLine($"A = [{string.Join(", ", item.AllItems())}]");
+                Console.WriteLine($"{item.Key} = [{string.Join(", ", item.Value.AllItems())}]");
             Console.WriteLine();
         }
 
@@ -72,7 +72,12 @@ namespace Pr_1_1
         /// </summary>
         protected static void GetResultOneTask<T>(SetWrapper<T> A, SetWrapper<T> B)
         {
-            GetInitialData([A, B]);
+            GetInitialData(
+                new Dictionary<string, SetWrapper<T>>()
+                    {
+                        ["A"] = A,
+                        ["B"] = B
+                    });
 
             Console.WriteLine($"A + B = [{string.Join(", ", A.Union(B).AllItems())}]");
             Console.WriteLine($"A - B = [{string.Join(", ", A.Intersect(B).AllItems())}]");
@@ -85,7 +90,14 @@ namespace Pr_1_1
         /// </summary>
         protected static void GetResultTwoTask<T>(SetWrapper<T> A, SetWrapper<T> B, SetWrapper<T> C, SetWrapper<T> U)
         {
-            GetInitialData([A, B, C, U]);
+            GetInitialData(
+                new Dictionary<string, SetWrapper<T>>()
+                {
+                    ["A"] = A,
+                    ["B"] = B,
+                    ["C"] = C,
+                    ["U"] = U
+                });
 
             Console.WriteLine($"A - (B + C) = [{string.Join(", ", A.Intersect(B.Union(C)).AllItems())}]"); // A ∩ (B ∪ C)
             Console.WriteLine($"(A + B) - C = [{string.Join(", ", (A.Union(B)).Intersect(C).AllItems())}]"); // (A ∪ B) ∩ C
